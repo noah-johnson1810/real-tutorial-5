@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "986718603666",
+    "project_id": "mobilemadhatter-johnson-n-a",
+    "storage_bucket": "mobilemadhatter-johnson-n-a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:986718603666:android:6cac1fb727dbd815ab994b",
+        "android_client_info": {
+          "package_name": "edu.sdsmt.johnson_n_a.tutorial56"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAhoox6Gugxx4Td9NIiNLakF89XRThA60"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
