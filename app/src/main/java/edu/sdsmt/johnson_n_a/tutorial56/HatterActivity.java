@@ -71,6 +71,9 @@ public class HatterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        final MonitorFirebase monitor = MonitorFirebase.INSTANCE;
+
         setContentView(R.layout.activity_hatter);
 
         /*
