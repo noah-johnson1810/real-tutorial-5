@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class Cloud {
 
     private final static FirebaseDatabase database = FirebaseDatabase.getInstance();
-    private final static DatabaseReference hattingsList = database.getReference("hattings");
+    private final static DatabaseReference hattingsList = database.getReference("hattings").child(MonitorFirebase.INSTANCE.getUserUid());
 
     /**
      * method to load a specific hatting
@@ -197,11 +197,9 @@ public class Cloud {
             // please fill in code here
         } else {
             FirebaseDatabase database = FirebaseDatabase.getInstance();
-            DatabaseReference hattingsList = database.getReference("hattings");
             String key = hattingsList.push().getKey();
-            hattingsList = hattingsList.child(key);
-            DatabaseReference finalHattingsList = hattingsList;
-            hattingsList.child("name").setValue(name, (databaseError, databaseReference) -> {
+            DatabaseReference finalHattingsList = hattingsList.child(key);
+            finalHattingsList.child("name").setValue(name, (databaseError, databaseReference) -> {
                 if (databaseError != null) {
                     // Error condition!
                     /*

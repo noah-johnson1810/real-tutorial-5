@@ -36,6 +36,7 @@ public class MonitorFirebase {
      */
     private MonitorFirebase() {
         createUser();
+        startAuthListening();
     }
 
     /**
@@ -55,6 +56,9 @@ public class MonitorFirebase {
                     result.put("/" + firebaseUser.getUid() + "/password", PASSWORD);
                     result.put("/" + firebaseUser.getUid() + "/email", EMAIL);
                     userRef.updateChildren(result);
+                    signIn();
+                } else if (task.getException().getMessage().equals("The email address is already in use by another account.")) {
+                    Log.d(TAG, "Problem: " + task.getException().getMessage());
                     signIn();
                 } else {
                     Log.d(TAG, "Problem: " + task.getException().getMessage());
@@ -83,5 +87,37 @@ public class MonitorFirebase {
                 }
             }
         });
+    }
+
+    /**
+     * Starts up a thread to monitor when a user is authenticated or not
+     */
+    private void startAuthListening() {
+        userAuth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                firebaseUser = firebaseAuth.getCurrentUser();
+                if (firebaseUser != null) {
+
+                    // User is signed in
+                    authenticated = true;
+                    Log.d(TAG, "onAuthStateChanged:signed_in:" + firebaseUser.getUid());
+                } else {
+
+                    // User is signed out
+                    authenticated = false;
+                    Log.d(TAG, "onAuthStateChanged:signed_out");
+                }
+            }
+        });
+
+    }
+
+    public String getUserUid() {
+        //stop people from getting the Uid if not logged in
+        if (firebaseUser == null)
+            return "";
+        else
+            return firebaseUser.getUid();
     }
 }
