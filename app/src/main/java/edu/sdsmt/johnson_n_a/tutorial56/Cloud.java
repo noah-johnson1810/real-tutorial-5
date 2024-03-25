@@ -106,11 +106,9 @@ public class Cloud {
             //connect to the database (hattings child)
 
             database.goOnline();
-            DatabaseReference myRef = hattingsList;
-
 
             // Read from the database
-            myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            hattingsList.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -196,7 +194,6 @@ public class Cloud {
             Toast.makeText(view.getContext(), "Name cannot be empty", Toast.LENGTH_SHORT).show();
             // please fill in code here
         } else {
-            FirebaseDatabase database = FirebaseDatabase.getInstance();
             String key = hattingsList.push().getKey();
             DatabaseReference finalHattingsList = hattingsList.child(key);
             finalHattingsList.child("name").setValue(name, (databaseError, databaseReference) -> {
