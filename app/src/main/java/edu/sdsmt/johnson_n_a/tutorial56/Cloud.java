@@ -1,5 +1,6 @@
 package edu.sdsmt.johnson_n_a.tutorial56;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -187,12 +188,11 @@ public class Cloud {
      */
     public void saveToCloud(String name, HatterView view) {
         name = name.trim();
-        if (name.length() == 0) {
+        if (name.isEmpty()) {
             /*
              *  If we fail to save, display a toast to let the user know the save failed
              */
             Toast.makeText(view.getContext(), "Name cannot be empty", Toast.LENGTH_SHORT).show();
-            // please fill in code here
         } else {
             String key = hattingsList.push().getKey();
             DatabaseReference finalHattingsList = hattingsList.child(key);
@@ -210,4 +210,18 @@ public class Cloud {
             Toast.makeText(view.getContext(), "Saved successfully", Toast.LENGTH_SHORT).show();
         }
     }
+
+    public void deleteFromCloud(final String catId, final View view) {
+        DatabaseReference hattingRef = hattingsList.child(catId);
+        hattingRef.removeValue((databaseError, databaseReference) -> {
+            if (databaseError != null) {
+                // Error condition!
+                Toast.makeText(view.getContext(), "Unable to delete item", Toast.LENGTH_SHORT).show();
+            } else {
+                // Deletion successful
+                Toast.makeText(view.getContext(), "Item deleted successfully", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }
+

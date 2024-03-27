@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
 public class LoadingDlg extends DialogFragment {
@@ -18,6 +19,7 @@ public class LoadingDlg extends DialogFragment {
     /**
      * Create the dialog box
      */
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle bundle) {
 
@@ -38,15 +40,11 @@ public class LoadingDlg extends DialogFragment {
         final AlertDialog dlg = builder.create();
 
         // Get a reference to the view we are going to load into
-        final HatterView view = getActivity().findViewById(R.id.hatterView);
+        final HatterView view = requireActivity().findViewById(R.id.hatterView);
         Cloud cloud = new Cloud();
         cloud.loadFromCloud(view, catId, dlg);
 
         return dlg;
-    }
-
-    public String getCatId() {
-        return this.catId;
     }
 
     public void setCatId(String id) {
@@ -57,7 +55,7 @@ public class LoadingDlg extends DialogFragment {
      * Save the instance state
      */
     @Override
-    public void onSaveInstanceState(Bundle bundle) {
+    public void onSaveInstanceState(@NonNull Bundle bundle) {
         super.onSaveInstanceState(bundle);
 
         bundle.putString(ID, catId);

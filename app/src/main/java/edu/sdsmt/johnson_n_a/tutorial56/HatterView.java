@@ -23,6 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.net.URL;
+import java.util.Objects;
 
 
 public class HatterView extends View {
@@ -200,42 +201,24 @@ public class HatterView extends View {
 
     public HatterView(Context context) {
         super(context);
-        init(null, 0);
+        init();
     }
 
     public HatterView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(attrs, 0);
+        init();
     }
 
     public HatterView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        init(attrs, defStyle);
+        init();
     }
 
-    private void init(AttributeSet attrs, int defStyle) {
+    private void init() {
         setHat(HAT_BLACK);
 
         customPaint = new Paint();
         customPaint.setColorFilter(new LightingColorFilter(params.color, 0));
-    }
-
-    /**
-     * Get the installed image path
-     *
-     * @return path or null if none
-     */
-    public String getImagePath() {
-        return params.imageUri;
-    }
-
-    /**
-     * Get the current custom hat color
-     *
-     * @return hat color integer value
-     */
-    public int getColor() {
-        return params.color;
     }
 
     /**
@@ -309,16 +292,16 @@ public class HatterView extends View {
                     }
 
                     imageBitmap = BitmapFactory.decodeStream(input);
+                    assert input != null;
                     input.close();
                     params.imageUri = uri.toString();
                     if (imageBitmap == null) {
-                        success = false;
                         handleURLError(getContext().getString(R.string.imageType));
                     } else
                         success = true;
 
                 } catch (Exception ex) {
-                    handleURLError(ex.getMessage());
+                    handleURLError(Objects.requireNonNull(ex.getMessage()));
                 }
 
                 if (!success) {
@@ -680,6 +663,7 @@ public class HatterView extends View {
         params = (Parameters) bundle.getSerializable(key);
 
         // Ensure the options are all set
+        assert params != null;
         setColor(params.color);
         setImageUri(Uri.parse(params.imageUri));
         setHat(params.hat);
@@ -703,6 +687,7 @@ public class HatterView extends View {
         params = snapshot.child("hatting").getValue(Parameters.class);
 
         //ensure all options are set
+        assert params != null;
         setColor(params.color);
         setImageUri(Uri.parse(params.imageUri));
         setHat(params.hat);

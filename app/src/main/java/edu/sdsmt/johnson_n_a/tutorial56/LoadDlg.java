@@ -26,7 +26,7 @@ public class LoadDlg extends DialogFragment implements Cloud.CatalogAdapter.Cata
         builder.setTitle(R.string.load_fm_title);
 
         // Get the layout inflater
-        LayoutInflater inflater = getActivity().getLayoutInflater();
+        LayoutInflater inflater = requireActivity().getLayoutInflater();
 
         // Pass null as the parent view because its going in the dialog layout
         View view = inflater.inflate(R.layout.catalog_dlg, null);

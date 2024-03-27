@@ -92,10 +92,8 @@ public class ColorSelectView extends View {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
-        switch (event.getActionMasked()) {
-            case MotionEvent.ACTION_DOWN:
-                touched(event.getX(0), event.getY(0));
-                break;
+        if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
+            touched(event.getX(0), event.getY(0));
         }
 
         return super.onTouchEvent(event);

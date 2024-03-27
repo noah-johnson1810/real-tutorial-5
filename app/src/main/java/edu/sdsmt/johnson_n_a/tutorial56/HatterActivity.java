@@ -300,6 +300,10 @@ public class HatterActivity extends AppCompatActivity {
             SaveDlg saveDlg = new SaveDlg();
             saveDlg.show(getSupportFragmentManager(), "save");
             return true;
+        } else if (itemId == R.id.menu_delete) {
+            DeleteDlg deleteDlg = new DeleteDlg();
+            deleteDlg.show(getSupportFragmentManager(), "delete");
+            return true;
         }
 
         return super.onOptionsItemSelected(item);

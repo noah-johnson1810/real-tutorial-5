@@ -46,16 +46,16 @@ public class PictureDlg extends DialogFragment {
     public Dialog onCreateDialog(final Bundle bundle) {
 
         //reset if needed
-        if (lastUrl.length() == 0)
-            lastUrl = getActivity().getResources().getString(R.string.mclaury_url);
+        if (lastUrl.isEmpty())
+            lastUrl = requireActivity().getResources().getString(R.string.mclaury_url);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
 
         // Set the title
         builder.setTitle(R.string.url_dlg_heading);
 
         // Get the layout inflater
-        LayoutInflater inflater = getActivity().getLayoutInflater();
+        LayoutInflater inflater = requireActivity().getLayoutInflater();
 
         // Pass null as the parent view because its going in the dialog layout
         builder.setView(inflater.inflate(R.layout.url_dlg, null));
@@ -69,6 +69,7 @@ public class PictureDlg extends DialogFragment {
             // before dismissing
             EditText urlText = dlg.findViewById(R.id.editUrl);
             try {
+                assert urlText != null;
                 URL url = new URL(urlText.getText().toString());
                 Uri uri = Uri.parse(url.toExternalForm());
                 lastUrl = url.toExternalForm();
@@ -98,6 +99,7 @@ public class PictureDlg extends DialogFragment {
         dlg.setOnShowListener((temp) -> {
             if (bundle == null) {
                 EditText urlText = dlg.findViewById(R.id.editUrl);
+                assert urlText != null;
                 urlText.setText(lastUrl);
                 urlText.selectAll();
             }

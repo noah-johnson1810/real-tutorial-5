@@ -20,6 +20,7 @@
     <string name="menu_load">Load from cloud&#8230;</string>
     <string name="menu_delete">Delete from cloud&#8230;</string>
     <string name="load_fm_title">Load from cloud</string>
+    <string name="delete_fm_title">Delete from cloud</string>
     <string name="dummy_text">Dummy</string>
     <string name="catalog_fail">Failed to load catalog of Hattings</string>
     <string name="loading">Loading</string>
@@ -27,6 +28,9 @@
     <string name="editName">Name</string>
     <string name="fileNameHint">file name</string>
     <string name="saveDialogTitle">Save</string>
+    <string name="confirmDeleteDialogTitle">Confirm Delete</string>
+    <string name="confirmDeleteDialogBodyText">Are you sure you want to delete</string>
+    <string name="menu_hat_icon">Menu Hat Icon</string>
 
     <string-array name="hats_spinner">
 

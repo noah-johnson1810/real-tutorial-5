@@ -47,7 +47,6 @@ public class SaveDlg extends DialogFragment implements Cloud.CatalogAdapter.Cata
      * @param name name to save it under
      */
     private void save(final String name) {
-        Log.i("Emily", "time to save this name: " + name);
         if (!(getActivity() instanceof HatterActivity)) {
             return;
         }
